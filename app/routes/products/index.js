@@ -1,5 +1,6 @@
 const express = require('express');
 const ProductController = require('../../controllers/ProductController');
+const { checkAdmin, checkLogin } = require('../../middleware/auth');
 const upload = require('../../middleware/upload');
 const router=express.Router();
 

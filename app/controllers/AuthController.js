@@ -27,6 +27,7 @@ exports.register = async (req, res) => {
         );
         // save user token
         savedUser.token = token;
+        await savedUser.save()
         res.status(201).json({ msg: "User created", data: savedUser });
 
     } catch (err) {
@@ -60,8 +61,8 @@ exports.login = async (req, res) => {
     
           // register user token
           existUser.token = token;
-    
-          res.status(200).send({token:existUser.token});
+          await existUser.save()
+          res.status(200).send(existUser);
 
     } catch (err) {
         res.status(500).send(err.message)

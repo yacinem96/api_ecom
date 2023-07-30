@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 const checkLogin = (req, res, next) => {
   const token =
-    req.body.token || req.query.token || req.headers["x-access-token"];
+    req.body.token || req.query.token || req.headers["x-access-token"] || req.headers.authorization.split(" ")[1];
   if (!token) {
     return res.status(403).send("a token is required for authentication");
   }
@@ -18,9 +18,9 @@ const checkLogin = (req, res, next) => {
 
 const checkAdmin = (req, res, next) => {
   const token =
-  req.body.token || req.query.token || req.headers["x-access-token"];
+  req.body.token || req.query.token || req.headers["x-access-token"] || req.headers.authorization.split(" ")[1];
 if (!token) {
-  return res.status(403).send("a token is required for authentication");
+  return res.status(403).send("a token is required for this operation");
 }
 try {
   const user= User.findOne({token:token});

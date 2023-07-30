@@ -19,6 +19,6 @@ app.use(cors());
 app.use(express.static(__dirname + "/public"));
 app.use("/uploads", express.static("uploads"));
 
-app.use("/",apiRoutes());
+app.use("/api",apiRoutes());
 
 app.listen(PORT ,()=>{ console.log(`app started on port ${PORT}`);})

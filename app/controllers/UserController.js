@@ -22,6 +22,18 @@ exports.getUserById = async (req, res) => {
         res.status(500).send(err.message);
     }
 }
+exports.getUserByToken = async (req, res) => {
+    try {
+        const token = req.params.token;
+        const user = await User.findOne({token});
+        if (!user) {
+            return res.status(404).send("User not found")
+        }
+        res.status(200).send(user);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+}
 
 exports.addUser = async (req, res) => {
     try {
